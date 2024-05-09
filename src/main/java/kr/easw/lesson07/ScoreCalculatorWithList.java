@@ -1,5 +1,7 @@
 package kr.easw.lesson07;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -41,20 +43,25 @@ public class ScoreCalculatorWithList {
     }
 
     static class CalculatorImpl implements Calculator {
+        List<Score> list=new ArrayList<>();
 
         @Override
         public void addScore(String subject, int score) {
-            throw new RuntimeException("이곳에 코드를 작성하세요.");
+            list.add(new Score(subject, score));
         }
 
         @Override
         public double getAverage() {
-            throw new RuntimeException("이곳에 코드를 작성하세요.");
+            double sum=0;
+            for (Score score : list) {sum += score.getScore();}
+
+            return sum/list.size();
         }
 
         @Override
         public int getSubjectCount() {
-            throw new RuntimeException("이곳에 코드를 작성하세요.");
+            if(list.isEmpty()){throw  new RuntimeException("No score found");}
+            return list.size();
         }
     }
 
